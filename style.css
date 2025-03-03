@@ -32,6 +32,11 @@ nav {
     cursor: pointer;
 }
 
+.nav-right button:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px, rgba(0, 0, 0, 0.35) 0px 6px 6px;
+}
+
+
 .slider-container {
     position: relative;
     max-width: 1000px;
