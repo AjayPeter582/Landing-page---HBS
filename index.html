@@ -21,17 +21,25 @@
         </div>
     </nav>
 
-    <div class="home-container">
+    <div class="slider-container">
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
         <div class="slider">
-            <div class="media-container">
-                <img id="slider-media" src="Images/video1.mp4" alt="Slider Image">
+            <div class="slide">
+                <img src="Images/image1.jpg" alt="Image 1">
+                <p class="caption">A beautiful sunrise over the ocean.</p>
             </div>
-            
-            <button class="prev-button" onclick="buttonclicked(0)">Prev</button>
-            <button class="next-button" onclick="buttonclicked(1)">Next</button>
+            <div class="slide">
+                <video class="video-slide" src="Images/video1.mp4"></video>
+                <p class="caption">Waves crashing on the shore.</p>
+            </div>
+            <div class="slide">
+                <img src="Images/image2.jpg" alt="Image 2">
+                <p class="caption">A peaceful beach view with palm trees.</p>
+            </div>
         </div>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </div>
-
+    
     <script src="index.js"></script>
 
 </body>
