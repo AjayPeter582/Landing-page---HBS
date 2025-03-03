@@ -1,50 +1,37 @@
-let imageindex=0;
+let currentIndex = 0;
 
-const images=[
-    {type:"image",src:"image1.jpg"},
-    {type:"image",src:"image2.jpg"},
-    {type:"video",src:"video1.mp4"}
-]
+function moveSlide(step) {
+    const slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length;
 
-const sliderImageEl=document.getElementById("slider-image");
-const prevBtnEl=document.getElementsByClassName("prev-button");
-const nextBtnEl=document.getElementsByClassName("next-button");
-const mediaContainerEl=document.getElementsByClassName("media-container")[0];
-console.log(mediaContainerEl)
+    currentIndex = (currentIndex + step + totalSlides) % totalSlides;
 
-function buttonclicked(source){
-    console.log("Button clicked")
-    console.log(imageindex)
-    imageindex=(imageindex+(source===0?-1:1)+images.length)%images.length;
-    updateImage();
-}
-function updateImage() {
-    mediaContainerEl.innerHTML = "";
-    const media = images[imageindex];
+    const slider = document.querySelector(".slider");
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    // Create new media element
-    const newMedia = document.createElement(media.type === "image" ? "img" : "video");
-    newMedia.id = "slider-image";
-    newMedia.src = `Images/${media.src}`;
-    newMedia.style.opacity = "0";
-    newMedia.style.transform = "translateX(-100%)"; // Start off-screen
+    slides.forEach((slide, index) => {
+        const caption = slide.querySelector(".caption");
+        const video = slide.querySelector("video");
 
-    if (media.type === "video") {
-        newMedia.controls = false;
-        newMedia.autoplay = true;
-    }
+        if (caption) {
+            caption.style.display = index === currentIndex ? "block" : "none";
+        }
 
-    mediaContainerEl.appendChild(newMedia);
-
-    // Trigger transition after element is added
-    setTimeout(() => {
-        newMedia.style.opacity = "1";
-        newMedia.style.transform = "translateX(0%)";
-    }, 50); // Small delay to allow transition
+        if (video) {
+            if (index === currentIndex) {
+                video.play(); 
+            } else {
+                video.pause();  
+                video.currentTime = 0;  
+            }
+        }
+    });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    moveSlide(0);
+});
 
 
-
-
-updateImage();
+document.querySelector(".video-slide").controls=false;
+document.querySelector(".video-slide").autoplay=true;
