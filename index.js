@@ -30,8 +30,10 @@ function moveSlide(step) {
 
 document.addEventListener("DOMContentLoaded", () => {
     moveSlide(0);
+    setInterval(() => moveSlide(1), 5000); 
 });
 
-
-document.querySelector(".video-slide").controls=false;
-document.querySelector(".video-slide").autoplay=true;
+document.querySelectorAll(".video-slide").forEach(video => {
+    video.controls = false;
+    video.autoplay = true;
+});
